@@ -1,25 +1,41 @@
 __author__ = 'yunong'
-import string
 
-# class MyWordCout:
-#     def __init__(self):
-#         do sth
-        # print "init"
+import pandas as pd
+from os import listdir
+import re
+import sys
 
 
-# def buildWordTable(self, input):
-    # files = os.listdir(os.curdir)
-    # print files
-    #
-    # f = []
-    # for(dirpath, dirnames, filenames) in walk('/'):
-    #     print f.extend(filenames)
-    #     break
+def getFileList(dir):
+    return listdir(dir)
 
-fread = open('./wc_input/a.txt', 'r')
-for line in fread:
-    for word in line.split():
-        #remove punct
-        word = word.translate(string.maketrans("", ""), string.punctuation)
-        word = word.lower()
-        print word
+
+def getFreqList(input_dir, filename):
+    freq_list = pd.Series()
+    regex = re.compile('[^a-zA-Z ]')
+    with open(input_dir+'/'+filename, 'r') as fread:
+        for line in fread:
+            line = regex.sub('', line)
+            freq_list = freq_list.add(pd.Series(line.split()).value_counts(), fill_value=0)
+    return freq_list
+
+
+def writeResult(filename, freq_dict):
+    with open(filename, 'w') as fwrite:
+        for key in freq_dict:
+            fwrite.writelines(str(key)+'\t'+str(freq_dict.get(key))+'\r\n')
+
+def main():
+    args = sys.argv
+    if len(args) < 3:
+        exit(-2)
+    input_dir = args[1]
+    output_dir = args[2]
+    freq_list = pd.Series()
+    for filename in getFileList(input_dir):
+        freq_list = freq_list.add(getFreqList(input_dir, filename), fill_value=0)
+    freq_dict = freq_list.to_dict()
+    writeResult(output_dir, freq_dict)
+
+# if __name__ is "main":
+main()
