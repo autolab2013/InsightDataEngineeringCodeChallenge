@@ -1,9 +1,8 @@
 __author__ = 'yunong'
 
-import pandas
 import sys
 import Utilities as ut
-import MyRunningMedianClass as myclass
+import MyRunningMedianHeap as myclass
 
 
 class RunningMedian:
