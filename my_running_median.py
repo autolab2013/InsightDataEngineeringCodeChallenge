@@ -62,7 +62,6 @@ class RunningMedian:
 
 def getMedianList(filelist, input_dir, my_median):
     median_list = []
-    word_list = []
     for files in filelist:
         with open(input_dir+'/'+files, 'r') as fread:
             for line in fread:
@@ -82,7 +81,6 @@ def writeResult(destination, median_list):
 
 def main():
     args = sys.argv
-    # args = ["", "wc_input", "wc_output/med_result.txt"]
     if len(args) < 3:
         exit(-2)
     input_dir = args[1]

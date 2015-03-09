@@ -2,7 +2,6 @@ __author__ = 'nathanlrf'
 
 import Utilities
 
-
 class MyMapReduceClass:
     def __init__(self):
         return
@@ -10,13 +9,12 @@ class MyMapReduceClass:
 
 def myMap(text):
     results = []
-    for w in text:
+    for word in text:
         # True if w contains non-alphanumeric characters
-        if not w.isalnum():
-            w = Utilities.cleanStr(w)
-    # True if w is a title-cased token
-        w = w.lower()
-        results.append((w, 1))
+        if not word.isalnum():
+            word = Utilities.cleanStr(word)
+        word = word.lower()
+        results.append((word, 1))
     return results
 
 
@@ -32,5 +30,5 @@ def myPartition(single_tuple):
     return tf
 
 
-def myReduce(Mapping):
-    return Mapping[0], sum(pair[1] for pair in Mapping[1])
+def myReduce(mapping):
+    return mapping[0], sum(pair[1] for pair in mapping[1])

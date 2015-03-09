@@ -14,12 +14,11 @@ def cleanStr(line):
     return result.lower()
 
 
-def swap(list, index_a, index_b):
-    list[index_a], list[index_b] = list[index_b], list[index_a]
+def swap(mylist, index_a, index_b):
+    mylist[index_a], mylist[index_b] = mylist[index_b], mylist[index_a]
 
 
-
-def tuple_sort(a, b):
+def tupleSort(a, b):
     if a[1] < b[1]:
         return 1
     elif a[1] > b[1]:
@@ -44,6 +43,7 @@ def getWordNumber(line):
     line = cleanStr(line)
     line = line.split()
     return len(line)
+
 
 def chunkText(text, proc_num):
     for i in xrange(0, len(text), proc_num):

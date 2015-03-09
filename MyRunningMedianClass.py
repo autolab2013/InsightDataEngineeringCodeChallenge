@@ -2,6 +2,7 @@ __author__ = 'nathanlrf'
 
 import Utilities as ut
 
+
 class MaxHeap:
     def __init__(self):
         self.list = []
